@@ -1,4 +1,4 @@
-import { Application } from 'pixi.js';
+import { Application, Assets, Ticker, Text } from 'pixi.js';
 
 import Scene from './Scene';
 import Menu from './Menu';
@@ -6,14 +6,46 @@ import Cards from './Cards';
 
 export class App
 {
+	private static readonly BACKGROUND_COLOR = 0xFFFFFF;
+	private static readonly FPS_COLOR = 0x000000;
+	private static readonly FPS_FONT_SIZE_FACTOR = 0.024;
+	private static readonly FPS_POS_FACTORS = { x: 0.01, y: 0.01 };
+	private static readonly FPS_UPDATE_INTERVAL = 1000;
+	
 	private pixi: Application<HTMLCanvasElement>;
 	
 	private currentScene: Scene;
-
+	private fpsCounter: Text;
+	private fpsUpdateTime = 0;
+	private framesCount = 0;
+	
 	public constructor()
 	{
-		this.pixi = new Application<HTMLCanvasElement>({ resizeTo: window, background: '#FFFFFF' });
+		this.pixi = new Application<HTMLCanvasElement>({ resizeTo: window, background: App.BACKGROUND_COLOR });
 		document.body.appendChild(this.pixi.view);
+
+		this.init();
+	}
+
+	private async init()
+	{
+		await Assets.load([{ alias: 'Card', src: 'assets/Card.png' }]);
+
+		this.fpsCounter = new Text('FPS: 0', { fontFamily: 'Arial', fontSize: 24, fill: App.FPS_COLOR });
+		this.fpsCounter.zIndex = 100;
+		this.pixi.stage.addChild(this.fpsCounter);
+
+		Ticker.shared.add(() =>
+		{
+			this.fpsUpdateTime += Ticker.shared.deltaMS;
+			++this.framesCount;
+			if (this.fpsUpdateTime > App.FPS_UPDATE_INTERVAL)
+			{
+				this.fpsCounter.text = `FPS: ${Math.round(this.framesCount)}`;
+				this.fpsUpdateTime -= App.FPS_UPDATE_INTERVAL;
+				this.framesCount = 0;
+			}
+		}, this);
 
 		this.switchScene('menu');
 	}
@@ -54,6 +86,11 @@ export class App
 
 	public resize()
 	{
+		const minSize = Math.min(window.innerWidth, window.innerHeight);
+		this.fpsCounter.x = minSize * App.FPS_POS_FACTORS.x;
+		this.fpsCounter.y = minSize * App.FPS_POS_FACTORS.y;
+		this.fpsCounter.style.fontSize = minSize * App.FPS_FONT_SIZE_FACTOR;
+
 		if (this.currentScene)
 		{
 			this.currentScene.resize(window.innerWidth, window.innerHeight);
