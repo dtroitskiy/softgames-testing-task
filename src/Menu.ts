@@ -1,4 +1,4 @@
-import { Container, Graphics, Text } from 'pixi.js';
+import { Graphics, Text } from 'pixi.js';
 import { FancyButton } from '@pixi/ui';
 
 import Scene from './Scene';
@@ -33,11 +33,12 @@ export default class Menu extends Scene
 	{
 		this.removeChildren();
 
-		const buttonWidth = Math.min(width * Menu.BUTTON_SIZE_FACTORS.width, height * Menu.BUTTON_SIZE_FACTORS.width);
-		const buttonHeight = Math.min(width * Menu.BUTTON_SIZE_FACTORS.height, height * Menu.BUTTON_SIZE_FACTORS.height);
-		const buttonVSpacing = Math.min(width * Menu.BUTTON_V_SPACING_FACTOR, height * Menu.BUTTON_V_SPACING_FACTOR);
-		const buttonCornerRadius = Math.min(width * Menu.BUTTON_CORNER_RADIUS_FACTOR, height * Menu.BUTTON_CORNER_RADIUS_FACTOR);
-		const buttonLabelFontSize = Math.min(width * Menu.BUTTON_LABEL_FONT_SIZE_FACTOR, height * Menu.BUTTON_LABEL_FONT_SIZE_FACTOR);
+		const minSize = Math.min(width, height);
+		const buttonWidth = minSize * Menu.BUTTON_SIZE_FACTORS.width;
+		const buttonHeight = minSize * Menu.BUTTON_SIZE_FACTORS.height;
+		const buttonVSpacing = minSize * Menu.BUTTON_V_SPACING_FACTOR;
+		const buttonCornerRadius = minSize * Menu.BUTTON_CORNER_RADIUS_FACTOR;
+		const buttonLabelFontSize = minSize * Menu.BUTTON_LABEL_FONT_SIZE_FACTOR;
 		let buttonX = width * 0.5;
 		let buttonY = (height - (buttonHeight + buttonVSpacing) * Menu.BUTTON_CONFIGS.length - buttonVSpacing) * 0.5;
 		
