@@ -42,7 +42,7 @@ export class App
 
 	private async init()
 	{
-		await Assets.load([{ alias: 'Card', src: 'assets/Card.png' }]);
+		await Assets.load([{ alias: 'Card', src: 'sprites/Card.png' }]);
 
 		this.fpsCounter = new Text('FPS: 0', { fontFamily: 'Arial', fontSize: 24, fill: App.FPS_COLOR });
 		this.fpsCounter.zIndex = 100;
