@@ -37,7 +37,8 @@ export default class Menu extends Scene
 		};
 		const buttonVSpacing = minSize * Menu.BUTTON_V_SPACING_FACTOR;
 		let buttonX = width * 0.5;
-		let buttonY = (height - (buttonOptions.height + buttonVSpacing) * Menu.BUTTON_CONFIGS.length - buttonVSpacing) * 0.5;
+		let buttonY = (height - (buttonOptions.height + buttonVSpacing) * Menu.BUTTON_CONFIGS.length - buttonVSpacing) * 0.5
+		            + buttonOptions.height * 0.5;
 		
 		for (const buttonConfig of Menu.BUTTON_CONFIGS)
 		{
@@ -45,7 +46,7 @@ export default class Menu extends Scene
 			const button = new Button(buttonOptions);
 			button.x = buttonX;
 			button.y = buttonY;
-			button.anchor.set(0.5, 0);
+			button.anchor.set(0.5, 0.5);
 
 			button.onUp.connect(() =>
 			{
