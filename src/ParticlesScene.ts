@@ -6,7 +6,7 @@ import Scene from './Scene';
 export default class ParticlesScene extends Scene
 {
 	private static readonly SCALE_FACTOR = 0.005;
-	private static readonly Y_POS_FACTOR = 0.75;
+	private static readonly Y_POS_FACTOR = 0.25;
 
 	private emitter: particles.Emitter;
 	private emitterContainer: Container;
@@ -142,8 +142,7 @@ export default class ParticlesScene extends Scene
 	{
 		const minSize = Math.min(width, height);
 		this.emitterContainer.x = width * 0.5;
-		this.emitterContainer.y = height * 0.5;
+		this.emitterContainer.y = height * 0.5 + minSize * ParticlesScene.Y_POS_FACTOR;
 		this.emitterContainer.scale.set(minSize * ParticlesScene.SCALE_FACTOR);
-		this.emitterContainer.y = minSize * ParticlesScene.Y_POS_FACTOR;
 	}
 }
