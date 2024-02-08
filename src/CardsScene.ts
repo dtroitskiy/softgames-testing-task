@@ -1,4 +1,4 @@
-import { Container, Text, Ticker } from 'pixi.js';
+import { Container, Ticker } from 'pixi.js';
 import * as TWEEN from '@tweenjs/tween.js';
 
 import Scene from './Scene';

@@ -78,6 +78,7 @@ export class App
 		if (this.currentScene)
 		{
 			this.currentScene.removeFromParent();
+			this.currentScene.destroy();
 			this.currentScene = null;
 		}
 
@@ -123,6 +124,7 @@ export class App
 		if (this.backButton)
 		{
 			this.backButton.removeFromParent();
+			this.backButton.destroy();
 		}
 
 		const minSize = Math.min(window.innerWidth, window.innerHeight);
