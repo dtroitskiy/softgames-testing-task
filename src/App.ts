@@ -4,6 +4,7 @@ import Scene from './Scene';
 import Button from './Button';
 import Menu from './Menu';
 import Cards from './Cards';
+import Particles from './Particles';
 
 export class App
 {
@@ -42,7 +43,11 @@ export class App
 
 	private async init()
 	{
-		await Assets.load([{ alias: 'Card', src: 'sprites/Card.png' }]);
+		await Assets.load([
+			{ alias: 'Card', src: 'sprites/Card.png' },
+			{ alias: 'Particle', src: 'sprites/Particle.png' },
+			{ alias: 'Fire', src: 'sprites/Fire.png' }
+		]);
 
 		this.fpsCounter = new Text('FPS: 0', { fontFamily: 'Arial', fontSize: 24, fill: App.FPS_COLOR });
 		this.fpsCounter.zIndex = 100;
@@ -84,14 +89,13 @@ export class App
 				break;
 			case 'cards':
 			 	this.currentScene = new Cards();
-				this.backButton.visible = true;
 				break;
 			// case 'text':
 			// 	this.currentScene = new Text();
 			// 	break;
-			// case 'particles':
-			// 	this.currentScene = new Particles();
-			// 	break;
+			case 'particles':
+				this.currentScene = new Particles();
+			break;
 		}
 
 		if (this.currentScene)
@@ -166,11 +170,11 @@ document.addEventListener('DOMContentLoaded', () =>
 	const app = new App();
 	window.addEventListener('resize', () => app.resize());
 
-	const body = document.body;
+	/*const body = document.body;
 	const onPointerDown = () =>
 	{
 		body.requestFullscreen();
 		body.removeEventListener('pointerdown', onPointerDown);
 	};
-	body.addEventListener('pointerdown', onPointerDown);
+	body.addEventListener('pointerdown', onPointerDown);*/
 });
