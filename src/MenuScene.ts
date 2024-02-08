@@ -3,7 +3,7 @@ import Button from './Button';
 
 type OnButtonClickedCallback = (buttonID: string) => void;
 
-export default class Menu extends Scene
+export default class MenuScene extends Scene
 {
 	private static readonly BUTTON_SIZE_FACTORS = { width: 0.3, height: 0.08 };
 	private static readonly BUTTON_V_SPACING_FACTOR = 0.03;
@@ -29,18 +29,18 @@ export default class Menu extends Scene
 
 		const minSize = Math.min(width, height);
 		const buttonOptions = {
-			width: minSize * Menu.BUTTON_SIZE_FACTORS.width,
-			height: minSize * Menu.BUTTON_SIZE_FACTORS.height,
-			cornerRadius: minSize * Menu.BUTTON_CORNER_RADIUS_FACTOR,
+			width: minSize * MenuScene.BUTTON_SIZE_FACTORS.width,
+			height: minSize * MenuScene.BUTTON_SIZE_FACTORS.height,
+			cornerRadius: minSize * MenuScene.BUTTON_CORNER_RADIUS_FACTOR,
 			label: '',
-			labelFontSize: minSize * Menu.BUTTON_LABEL_FONT_SIZE_FACTOR
+			labelFontSize: minSize * MenuScene.BUTTON_LABEL_FONT_SIZE_FACTOR
 		};
-		const buttonVSpacing = minSize * Menu.BUTTON_V_SPACING_FACTOR;
+		const buttonVSpacing = minSize * MenuScene.BUTTON_V_SPACING_FACTOR;
 		let buttonX = width * 0.5;
-		let buttonY = (height - (buttonOptions.height + buttonVSpacing) * Menu.BUTTON_CONFIGS.length - buttonVSpacing) * 0.5
+		let buttonY = (height - (buttonOptions.height + buttonVSpacing) * MenuScene.BUTTON_CONFIGS.length - buttonVSpacing) * 0.5
 		            + buttonOptions.height * 0.5;
 		
-		for (const buttonConfig of Menu.BUTTON_CONFIGS)
+		for (const buttonConfig of MenuScene.BUTTON_CONFIGS)
 		{
 			buttonOptions.label = buttonConfig.label;
 			const button = new Button(buttonOptions);

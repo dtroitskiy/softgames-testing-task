@@ -2,9 +2,10 @@ import { Application, Assets, Ticker, Text } from 'pixi.js';
 
 import Scene from './Scene';
 import Button from './Button';
-import Menu from './Menu';
-import Cards from './Cards';
-import Particles from './Particles';
+import MenuScene from './MenuScene';
+import CardsScene from './CardsScene';
+import TextScene from './TextScene';
+import ParticlesScene from './ParticlesScene';
 
 export class App
 {
@@ -83,19 +84,19 @@ export class App
 		switch (sceneID)
 		{
 			case 'menu':
-				const menu = new Menu();
+				const menu = new MenuScene();
 				menu.addButtonClickedHandler(this.onMenuButtonClicked.bind(this));
 				this.currentScene = menu;
 				break;
 			case 'cards':
-			 	this.currentScene = new Cards();
+			 	this.currentScene = new CardsScene();
 				break;
-			// case 'text':
-			// 	this.currentScene = new Text();
-			// 	break;
+			case 'text':
+				this.currentScene = new TextScene();
+				break;
 			case 'particles':
-				this.currentScene = new Particles();
-			break;
+				this.currentScene = new ParticlesScene();
+				break;
 		}
 
 		if (this.currentScene)

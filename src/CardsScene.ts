@@ -4,7 +4,7 @@ import * as TWEEN from '@tweenjs/tween.js';
 import Scene from './Scene';
 import Card from './Card';
 
-export default class Cards extends Scene
+export default class CardsScene extends Scene
 {
 	private static readonly CARDS_COUNT = 144;
 	private static readonly CARD_WIDTH_FACTOR = 0.18;
@@ -18,7 +18,7 @@ export default class Cards extends Scene
 	private leftStackTopCoords = { x: 0, y: 0 };
 	private rightStackTopCoords = { x: 0, y: 0 };
 	private movedCard: Card;
-	private movedCardIndex: number = Cards.CARDS_COUNT - 1;
+	private movedCardIndex: number = CardsScene.CARDS_COUNT - 1;
 	private movedCardTween: TWEEN.Tween<any>;
 
 	public constructor()
@@ -30,7 +30,7 @@ export default class Cards extends Scene
 		this.rightStack = new Container();
 		this.addChild(this.rightStack);
 
-		for (let i = 0; i < Cards.CARDS_COUNT; i++)
+		for (let i = 0; i < CardsScene.CARDS_COUNT; i++)
 		{
 			const card = new Card(`Card ${i + 1}`);
 			this.leftStack.addChild(card);
@@ -59,7 +59,7 @@ export default class Cards extends Scene
 				.to({
 					x: this.rightStack.x + this.rightStackTopCoords.x,
 					y: this.rightStack.y + this.rightStackTopCoords.y
-				}, Cards.CARD_MOVE_TIME)
+				}, CardsScene.CARD_MOVE_TIME)
 				.easing(TWEEN.Easing.Quadratic.InOut)
 				.onComplete(() =>
 				{
@@ -68,10 +68,10 @@ export default class Cards extends Scene
 					this.movedCard.removeFromParent();
 					this.rightStack.addChild(this.movedCard);
 					
-					this.leftStackTopCoords.x += Cards.CARD_OFFSET_IN_STACK;
-					this.leftStackTopCoords.y += Cards.CARD_OFFSET_IN_STACK;
-					this.rightStackTopCoords.x -= Cards.CARD_OFFSET_IN_STACK;
-					this.rightStackTopCoords.y -= Cards.CARD_OFFSET_IN_STACK;
+					this.leftStackTopCoords.x += CardsScene.CARD_OFFSET_IN_STACK;
+					this.leftStackTopCoords.y += CardsScene.CARD_OFFSET_IN_STACK;
+					this.rightStackTopCoords.x -= CardsScene.CARD_OFFSET_IN_STACK;
+					this.rightStackTopCoords.y -= CardsScene.CARD_OFFSET_IN_STACK;
 				})
 				.start();
 
@@ -85,36 +85,36 @@ export default class Cards extends Scene
 
 	public resize(width: number, height: number)
 	{
-		this.leftStack.x = width * Cards.LEFT_STACK_X_FACTOR;
+		this.leftStack.x = width * CardsScene.LEFT_STACK_X_FACTOR;
 		this.leftStack.y = height * 0.5;
-		this.rightStack.x = width * Cards.RIGHT_STACK_X_FACTOR;
+		this.rightStack.x = width * CardsScene.RIGHT_STACK_X_FACTOR;
 		this.rightStack.y = height * 0.5;
 
-		const cardWidth = Math.min(width * Cards.CARD_WIDTH_FACTOR, height * Cards.CARD_WIDTH_FACTOR);
+		const cardWidth = Math.min(width * CardsScene.CARD_WIDTH_FACTOR, height * CardsScene.CARD_WIDTH_FACTOR);
 		if (this.movedCard)
 		{
 			this.movedCard.resize(cardWidth);
 		}
 
-		this.leftStackTopCoords.x = Cards.CARDS_COUNT / 2 * Cards.CARD_OFFSET_IN_STACK;
-		this.leftStackTopCoords.y = Cards.CARDS_COUNT / 2 * Cards.CARD_OFFSET_IN_STACK;
+		this.leftStackTopCoords.x = CardsScene.CARDS_COUNT / 2 * CardsScene.CARD_OFFSET_IN_STACK;
+		this.leftStackTopCoords.y = CardsScene.CARDS_COUNT / 2 * CardsScene.CARD_OFFSET_IN_STACK;
 		for (const card of this.leftStack.children as Card[])
 		{
 			card.resize(cardWidth);
 			card.x = this.leftStackTopCoords.x;
 			card.y = this.leftStackTopCoords.y;
-			this.leftStackTopCoords.x -= Cards.CARD_OFFSET_IN_STACK;
-			this.leftStackTopCoords.y -= Cards.CARD_OFFSET_IN_STACK;
+			this.leftStackTopCoords.x -= CardsScene.CARD_OFFSET_IN_STACK;
+			this.leftStackTopCoords.y -= CardsScene.CARD_OFFSET_IN_STACK;
 		}
-		this.rightStackTopCoords.x = Cards.CARDS_COUNT / 2 * Cards.CARD_OFFSET_IN_STACK;
-		this.rightStackTopCoords.y = Cards.CARDS_COUNT / 2 * Cards.CARD_OFFSET_IN_STACK;
+		this.rightStackTopCoords.x = CardsScene.CARDS_COUNT / 2 * CardsScene.CARD_OFFSET_IN_STACK;
+		this.rightStackTopCoords.y = CardsScene.CARDS_COUNT / 2 * CardsScene.CARD_OFFSET_IN_STACK;
 		for (const card of this.rightStack.children as Card[])
 		{
 			card.resize(cardWidth);
 			card.x = this.rightStackTopCoords.x;
 			card.y = this.rightStackTopCoords.y;
-			this.rightStackTopCoords.x -= Cards.CARD_OFFSET_IN_STACK;
-			this.rightStackTopCoords.y -= Cards.CARD_OFFSET_IN_STACK;
+			this.rightStackTopCoords.x -= CardsScene.CARD_OFFSET_IN_STACK;
+			this.rightStackTopCoords.y -= CardsScene.CARD_OFFSET_IN_STACK;
 		}
 	}
 }

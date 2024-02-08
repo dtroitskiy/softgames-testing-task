@@ -3,7 +3,7 @@ import * as particles from '@pixi/particle-emitter';
 
 import Scene from './Scene';
 
-export default class Particles extends Scene
+export default class ParticlesScene extends Scene
 {
 	private static readonly SCALE_FACTOR = 0.005;
 	private static readonly Y_POS_FACTOR = 0.75;
@@ -129,7 +129,7 @@ export default class Particles extends Scene
 				]
 			}
 		);
-		
+
 		this.emitter.emit = true;
 
 		Ticker.shared.add(() =>
@@ -143,7 +143,7 @@ export default class Particles extends Scene
 		const minSize = Math.min(width, height);
 		this.emitterContainer.x = width * 0.5;
 		this.emitterContainer.y = height * 0.5;
-		this.emitterContainer.scale.set(minSize * Particles.SCALE_FACTOR);
-		this.emitterContainer.y = minSize * Particles.Y_POS_FACTOR;
+		this.emitterContainer.scale.set(minSize * ParticlesScene.SCALE_FACTOR);
+		this.emitterContainer.y = minSize * ParticlesScene.Y_POS_FACTOR;
 	}
 }
