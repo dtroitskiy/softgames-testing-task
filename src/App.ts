@@ -46,6 +46,8 @@ export class App
 	{
 		await Assets.load([
 			{ alias: 'Card', src: 'sprites/Card.png' },
+			{ alias: 'Coin', src: 'sprites/Coin.png' },
+			{ alias: 'PiggyBank', src: 'sprites/PiggyBank.png' },
 			{ alias: 'Particle', src: 'sprites/Particle.png' },
 			{ alias: 'Fire', src: 'sprites/Fire.png' }
 		]);
