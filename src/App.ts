@@ -17,7 +17,7 @@ export class App
 	private static readonly BACK_BUTTON_SIZE_FACTORS = { width: 0.12, height: 0.05 };
 	private static readonly BACK_BUTTON_CORNER_RADIUS_FACTOR = 0.015;
 	private static readonly BACK_BUTTON_LABEL_FONT_SIZE_FACTOR = 0.03;
-	private static readonly BACK_BUTTON_MARGIN_FACTORS = { x: 0.98, y: 0.02 };
+	private static readonly BACK_BUTTON_MARGIN_FACTORS = { x: 0.02, y: 0.02 };
 	
 	private pixi: Application<HTMLCanvasElement>;
 	
@@ -130,7 +130,7 @@ export class App
 		this.backButton.anchor.set(0.5, 0.5);
 		this.backButton.zIndex = 100;
 		this.backButton.visible = this.currentSceneID != 'menu';
-		this.backButton.x = minSize * App.BACK_BUTTON_MARGIN_FACTORS.x - this.backButton.width * 0.5;
+		this.backButton.x = window.innerWidth - this.backButton.width * 0.5 - minSize * App.BACK_BUTTON_MARGIN_FACTORS.x;
 		this.backButton.y = minSize * App.BACK_BUTTON_MARGIN_FACTORS.y + this.backButton.height * 0.5;
 		this.backButton.onUp.connect(this.onBackButtonClicked.bind(this));
 		this.pixi.stage.addChild(this.backButton);
