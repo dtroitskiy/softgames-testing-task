@@ -171,11 +171,11 @@ document.addEventListener('DOMContentLoaded', () =>
 	const app = new App();
 	window.addEventListener('resize', () => app.resize());
 
-	/*const body = document.body;
+	const body = document.body;
 	const onPointerDown = () =>
 	{
 		body.requestFullscreen();
 		body.removeEventListener('pointerdown', onPointerDown);
 	};
-	body.addEventListener('pointerdown', onPointerDown);*/
+	body.addEventListener('pointerdown', onPointerDown);
 });
