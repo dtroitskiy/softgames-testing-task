@@ -35,12 +35,12 @@ export default class TextScene extends Scene
 		if (this.textUpdateTime > TextScene.TEXT_UPDATE_INTERVAL)
 		{
 			this.refreshText();
+			this.textUpdateTime -= TextScene.TEXT_UPDATE_INTERVAL;
 		}
 	}
 
 	private refreshText()
 	{
-		this.textUpdateTime = 0;
 		const coins = Math.round(Math.random() * TextScene.MAX_COINS);
 		this.richText.text = `You have ${coins}:Coin: in your :PiggyBank:`;
 		this.randomFontSize = TextScene.FONT_SIZE_MIN + Math.random() * (TextScene.FONT_SIZE_MAX - TextScene.FONT_SIZE_MIN);
