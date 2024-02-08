@@ -21,6 +21,8 @@ export class App
 	
 	private pixi: Application<HTMLCanvasElement>;
 	
+	private isInitialized = false;
+
 	private currentScene: Scene;
 	private currentSceneID: string;
 	
@@ -57,6 +59,8 @@ export class App
 				this.framesCount = 0;
 			}
 		}, this);
+
+		this.isInitialized = true;
 
 		this.switchScene('menu');
 	}
@@ -144,6 +148,10 @@ export class App
 
 	public resize()
 	{
+		if (!this.isInitialized)
+		{
+			return false;
+		}
 		this.resizeFPS();
 		this.createBackButton();
 		if (this.currentScene)
@@ -157,4 +165,12 @@ document.addEventListener('DOMContentLoaded', () =>
 {
 	const app = new App();
 	window.addEventListener('resize', () => app.resize());
+
+	const body = document.body;
+	const onPointerDown = () =>
+	{
+		body.requestFullscreen();
+		body.removeEventListener('pointerdown', onPointerDown);
+	};
+	body.addEventListener('pointerdown', onPointerDown);
 });
